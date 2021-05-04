@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>B21_Ex02_Shahar_311359566_Nadav_312173776</RootNamespace>
+  </PropertyGroup>
+
+</Project>
