@@ -4,8 +4,13 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
     class Program
     {
+        private static int m_TurnNum;
+
+
         static void Main(string[] args)
         {
+            
+            
             Console.WriteLine("Hello");
             Move first = new Move(1, 2);
             first.SetMove(2, 3);
@@ -25,5 +30,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
 
         }
+
+
+        public static int TurnNum {
+            get { return m_TurnNum; }
+        }
+
+
+
+
     }
 }
