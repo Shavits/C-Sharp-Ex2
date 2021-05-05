@@ -16,14 +16,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             m_BoardMatrix = new Move.enumXO[i_BoardSize, i_BoardSize];
         }
 
-        public bool UpdateBoard(Move i_Move, Move.enumXO i_Turn)
+        public bool UpdateBoard(Move i_Move)
         {
             bool movesuccessful = false;
             if (CheckLegalMove(i_Move))
             {
                 if(m_BoardMatrix[i_Move.Row, i_Move.Column].Equals(null))
                 {
-                    m_BoardMatrix[i_Move.Row, i_Move.Column] = i_Turn;
+                    m_BoardMatrix[i_Move.Row, i_Move.Column] = i_Move.Turn;
                     movesuccessful = true;
                 }
             }
