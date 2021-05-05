@@ -8,7 +8,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
     class UI
     {
 
-        public void BoardPrinter(Board i_Board)
+        public static void BoardPrinter(Board i_Board)
         {
             //Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder row = new StringBuilder();
@@ -34,7 +34,8 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
 
 
-        public Move GetPlayerMove()
+
+        public static Move GetPlayerMove()
         {
             Console.WriteLine("Please enter your move");
             Console.WriteLine("Please enter your row position");
@@ -52,7 +53,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             return PlayerMove;
         }
 
-        private bool IsValidInput(string i_Input)
+        private static bool IsValidInput(string i_Input)
         {
             if (i_Input == "Q")
             {
