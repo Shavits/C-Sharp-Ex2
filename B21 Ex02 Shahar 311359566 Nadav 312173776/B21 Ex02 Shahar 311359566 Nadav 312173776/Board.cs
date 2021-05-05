@@ -36,6 +36,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             bool legalMove = true;
             if (i_Move.Row < 0 || i_Move.Row >= m_BoardSize || i_Move.Column < 0 || i_Move.Column >= m_BoardSize)
             {
+                Console.WriteLine("Please enter legal number");
                 legalMove = false;
             }
             return legalMove;
@@ -118,7 +119,10 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             get { return m_BoardMatrix; }
         }
-
+        public int BoardSize
+        {
+            get { return m_BoardSize; }
+        }
 
     }
 }
