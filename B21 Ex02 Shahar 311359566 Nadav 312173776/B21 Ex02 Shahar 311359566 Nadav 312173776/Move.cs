@@ -11,13 +11,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         private enumXO m_Turn;
 
 
-        public Move()
-        {
-            m_Row = 0;
-            m_Column = 0;
-           // m_Turn = enumXO.Empty;
-        }
-
+      
         public Move(int i_row, int i_column)
         {
             m_Row = i_row;

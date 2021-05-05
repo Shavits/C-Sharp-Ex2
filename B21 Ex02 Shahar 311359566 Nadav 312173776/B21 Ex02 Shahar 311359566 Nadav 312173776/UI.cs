@@ -12,18 +12,27 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             //Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder row = new StringBuilder();
+           
             for (int i = 1; i <= i_Board.BoardSize; i++) {
                 row.Append("   " + i);
             }
             Console.WriteLine(row);
            
-            for (int i = 1; i <= i_Board.BoardSize; i++)
+            for (int i = 0; i < i_Board.BoardSize; i++)
             {
                 row.Clear();
-                row.Append(i + "|");
-                for (int j = 1; j <= i_Board.BoardSize; j++)
+                row.Append((i+1)+"|");
+                for (int j = 01; j < i_Board.BoardSize; j++)
                 {
-                    row.Append(i_Board.BoardMatrix[i, j] + "|");
+                  if(i_Board.BoardMatrix[i, j] == Move.enumXO.EMPTY)
+                    {
+                        row.Append("   |");
+                    }
+                    else
+                    {
+                        row.Append(" "+i_Board.BoardMatrix[i, j]+" |");
+                    }
+                   
                 }
                 Console.WriteLine(row);
                 row.Clear();
