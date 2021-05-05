@@ -20,14 +20,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             StringBuilder row = new StringBuilder();
             for (int i =0 ; i < 3; i++)
             {
-                row.Append("   " + i);
+                row.Append("   " + (i+1));
             }
             Console.WriteLine(row);
 
             for (int i = 0; i < 3; i++)
             {
                 row.Clear();
-                row.Append(i + "|");
+                row.Append((i+1) + "|");
                 for (int j = 0; j < 3; j++)
                 {
                     row.Append(arr[i, j] + "|");
@@ -38,6 +38,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 Console.WriteLine(row);
             }
 
+            Move first = new Move(2, 3);
+            Console.WriteLine(first.Turn);
+            Move first2 = new Move(2, 3);
+            Console.WriteLine(first2.Turn);
+            Move first3 = new Move(2, 3);
+            Console.WriteLine(first3.Turn);
+            Move first4 = new Move(2, 3);
+            Console.WriteLine(first4.Turn);
 
 
 
@@ -50,14 +58,16 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
 
 
-
-
-            }
+        }
 
 
         public static int TurnNum {
-            get { return m_TurnNum; }
-            set { m_TurnNum++; }
+            get { 
+                return m_TurnNum; 
+                }
+            set {
+                m_TurnNum = value;
+                 }
         }
 
 
