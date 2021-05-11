@@ -10,7 +10,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
         public static void BoardPrinter(Board i_Board)
         {
-            //Ex02.ConsoleUtils.Screen.Clear();
+            Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder row = new StringBuilder();
 
             for (int i = 1; i <= i_Board.BoardSize; i++)
@@ -23,7 +23,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             {
                 row.Clear();
                 row.Append((i + 1) + "|");
-                for (int j = 01; j < i_Board.BoardSize; j++)
+                for (int j = 0; j < i_Board.BoardSize; j++)
                 {
                     if (i_Board.BoardMatrix[i, j] == Move.enumXO.EMPTY)
                     {
@@ -31,7 +31,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     }
                     else
                     {
-                        row.Append(" " + i_Board.BoardMatrix[i, j] + " |");
+                        row.Append($" {i_Board.BoardMatrix[i, j]} |");
                     }
 
                 }
@@ -47,40 +47,53 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
         public static Move GetPlayerMove()
         {
-            Console.WriteLine("Please enter your move");
-            Console.WriteLine("Please enter your row position");
-            string row = Console.ReadLine();
-            Console.WriteLine("Please enter your column position");
-            string column = Console.ReadLine();
-            while (!(IsValidInput(row)) && !(IsValidInput(column)))
+            Console.WriteLine("Please enter your row number and column number seprated by a space");
+            string moveString = Console.ReadLine();
+            string[] inputs = moveString.Split(' ');
+            int[] parsedInts = new int[2];
+            while (!IsValidInputs(inputs, out parsedInts))
             {
-                Console.WriteLine("Please enter your other row position");
-                row = Console.ReadLine();
-                Console.WriteLine("Please enter your other column position");
-                column = Console.ReadLine();
+                Console.WriteLine("Invalid input, please enter your row number and column number seprated by a space");
+                moveString = Console.ReadLine();
+                inputs = moveString.Split(' ');
+                parsedInts = new int[2];
             }
-            Move PlayerMove = new Move(int.Parse(row), int.Parse(column));
+            Move PlayerMove = new Move(parsedInts[0]-1, parsedInts[1]-1);
             return PlayerMove;
         }
 
-        private static bool IsValidInput(string i_Input)
+        private static bool IsValidInputs(string[] i_Inputs, out int[] o_parsedInts)
         {
-            if (i_Input == "Q")
+            bool valid = true;
+            if(i_Inputs.Length == 1)
             {
-                Console.WriteLine("Are you sure you want to quit? (Y/N)");
-                string answer = Console.ReadLine();
-                if (answer == "Y")
+                if (i_Inputs[0] == "Q")
                 {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    GetPlayerMove();
+                    Console.WriteLine("Are you sure you want to quit? (Y/N)");
+                    string answer = Console.ReadLine();
+                    if (answer == "Y")
+                    {
+                        Environment.Exit(0);
+                    }
+                    else if (answer == "N")
+                    {
+                        GetPlayerMove();
+                    }
                 }
             }
-
-            int position;
-            bool valid = int.TryParse(i_Input, out position);
+            if(i_Inputs.Length != 2)
+            {
+                valid = false;
+            }
+            int[] parsedInts = new int[2];
+            for(int i =0; i<i_Inputs.Length; i++)
+            {
+                if (!int.TryParse(i_Inputs[i].ToString(), out parsedInts[i]))
+                {
+                    valid = false;
+                }
+            }
+            o_parsedInts = parsedInts;
             return valid;
         }
     }

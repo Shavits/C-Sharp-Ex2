@@ -15,6 +15,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             m_BoardSize = i_BoardSize;
             m_BoardMatrix = new Move.enumXO[i_BoardSize, i_BoardSize];
 
+
         }
 
         public bool UpdateBoard(Move i_Move)
@@ -37,15 +38,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             bool legalMove = true;
             if (i_Move.Row < 0 || i_Move.Row >= m_BoardSize || i_Move.Column < 0 || i_Move.Column >= m_BoardSize)
             {
-                Console.WriteLine("Please enter legal number");
                 legalMove = false;
             }
             return legalMove;
         }
 
-        public bool CheckWin()
+        public bool CheckLose()
         {
-            bool gameWon = true;
+            bool gameLost = false;
             //CheckRows
             for (int i = 0; i < m_BoardSize; i++)
             {
@@ -54,9 +54,9 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 {
                     row[j] = m_BoardMatrix[i, j];
                 }
-                if (CheckSeriesWin(row))
+                if (CheckSeriesLose(row))
                 {
-                    gameWon = false;
+                    gameLost = true;
                 }
             }
 
@@ -68,9 +68,9 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 {
                     col[j] = m_BoardMatrix[j, i];
                 }
-                if (CheckSeriesWin(col))
+                if (CheckSeriesLose(col))
                 {
-                    gameWon = false;
+                    gameLost = true;
                 }
             }
 
@@ -80,38 +80,47 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             {
                 diag1[i] = m_BoardMatrix[i, i];
             }
-            if (CheckSeriesWin(diag1))
+            if (CheckSeriesLose(diag1))
             {
-                gameWon = false;
+                gameLost = true;
             }
 
             Move.enumXO[] diag2 = new Move.enumXO[m_BoardSize];
-            for (int i = m_BoardSize; i > 0; i--)
+            for (int i = 0; i < m_BoardSize; i++)
             {
-                diag2[m_BoardSize - i] = m_BoardMatrix[m_BoardSize - i, m_BoardSize - i];
+                diag2[i] = m_BoardMatrix[i,m_BoardSize - i - 1];
             }
 
-            if (CheckSeriesWin(diag2))
+            if (CheckSeriesLose(diag2))
             {
-                gameWon = false;
+                gameLost = true;
             }
 
-            return gameWon;
+            return gameLost;
         }
 
-        private bool CheckSeriesWin(Move.enumXO[] i_Series)
+        private bool CheckSeriesLose(Move.enumXO[] i_Series)
         {
-            bool gameWon = true;
+            bool gameLost = true;
             Move.enumXO firstEntry = i_Series[0];
+            if(firstEntry == Move.enumXO.EMPTY)
+            {
+                gameLost = false;
+            }
             foreach (Move.enumXO entry in i_Series)
             {
                 if (!entry.Equals(firstEntry))
                 {
-                    gameWon = false;
+                    gameLost = false;
                 }
             }
 
-            return gameWon;
+            return gameLost;
+        }
+
+        public bool CheckTie()
+        {
+            return Program.TurnNum == Math.Pow(m_BoardSize, 2)-1;
         }
 
 

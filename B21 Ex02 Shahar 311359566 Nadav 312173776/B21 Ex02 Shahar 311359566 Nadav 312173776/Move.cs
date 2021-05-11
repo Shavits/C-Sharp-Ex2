@@ -11,12 +11,12 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         private enumXO m_Turn;
 
 
-        public Move()
+      /*  public Move()
         {
             m_Row = 0;
             m_Column = 0;
             m_Turn = enumXO.EMPTY;
-        }
+        }*/
         public Move(int i_row, int i_column)
         {
             m_Row = i_row;
@@ -24,21 +24,22 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             m_Turn = GetTurn(Program.TurnNum);
         }
 
-        private enumXO GetTurn(int i_turns)
+        public static enumXO GetTurn(int i_turns)
         {
             enumXO symbol = enumXO.X;
             if (i_turns % 2 == 1)
             {
                 symbol = enumXO.O;
             }
-            Program.TurnNum++;
+
+          // Program.TurnNum++;
             return symbol;
         }
         public enum enumXO
         {
+            EMPTY,
             X,
-            O,
-            EMPTY
+            O
         }
 
         public int Row
