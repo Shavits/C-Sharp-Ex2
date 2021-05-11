@@ -12,31 +12,32 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             //Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder row = new StringBuilder();
-           
-            for (int i = 1; i <= i_Board.BoardSize; i++) {
+
+            for (int i = 1; i <= i_Board.BoardSize; i++)
+            {
                 row.Append("   " + i);
             }
             Console.WriteLine(row);
-           
+
             for (int i = 0; i < i_Board.BoardSize; i++)
             {
                 row.Clear();
-                row.Append((i+1)+"|");
+                row.Append((i + 1) + "|");
                 for (int j = 01; j < i_Board.BoardSize; j++)
                 {
-                  if(i_Board.BoardMatrix[i, j] == Move.enumXO.EMPTY)
+                    if (i_Board.BoardMatrix[i, j] == Move.enumXO.EMPTY)
                     {
                         row.Append("   |");
                     }
                     else
                     {
-                        row.Append(" "+i_Board.BoardMatrix[i, j]+" |");
+                        row.Append(" " + i_Board.BoardMatrix[i, j] + " |");
                     }
-                   
+
                 }
                 Console.WriteLine(row);
                 row.Clear();
-                row.Append(" =").Append('=',4*i_Board.BoardSize);
+                row.Append(" =").Append('=', 4 * i_Board.BoardSize);
                 Console.WriteLine(row);
             }
         }
@@ -77,7 +78,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     GetPlayerMove();
                 }
             }
-               
+
             int position;
             bool valid = int.TryParse(i_Input, out position);
             return valid;

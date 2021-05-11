@@ -22,7 +22,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             bool movesuccessful = false;
             if (CheckLegalMove(i_Move))
             {
-                if(m_BoardMatrix[i_Move.Row, i_Move.Column].Equals(Move.enumXO.EMPTY))
+                if (m_BoardMatrix[i_Move.Row, i_Move.Column].Equals(Move.enumXO.EMPTY))
                 {
                     m_BoardMatrix[i_Move.Row, i_Move.Column] = i_Move.Turn;
                     movesuccessful = true;
@@ -47,10 +47,10 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             bool gameWon = true;
             //CheckRows
-            for(int i = 0; i<m_BoardSize; i++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
                 Move.enumXO[] row = new Move.enumXO[m_BoardSize];
-                for(int j = 0; j<m_BoardSize; j++)
+                for (int j = 0; j < m_BoardSize; j++)
                 {
                     row[j] = m_BoardMatrix[i, j];
                 }
@@ -84,11 +84,11 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             {
                 gameWon = false;
             }
-            
+
             Move.enumXO[] diag2 = new Move.enumXO[m_BoardSize];
             for (int i = m_BoardSize; i > 0; i--)
             {
-                diag2[m_BoardSize- i] = m_BoardMatrix[m_BoardSize - i, m_BoardSize - i];
+                diag2[m_BoardSize - i] = m_BoardMatrix[m_BoardSize - i, m_BoardSize - i];
             }
 
             if (CheckSeriesWin(diag2))
@@ -103,9 +103,10 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             bool gameWon = true;
             Move.enumXO firstEntry = i_Series[0];
-            foreach(Move.enumXO entry in i_Series)
+            foreach (Move.enumXO entry in i_Series)
             {
-                if (!entry.Equals(firstEntry)){
+                if (!entry.Equals(firstEntry))
+                {
                     gameWon = false;
                 }
             }

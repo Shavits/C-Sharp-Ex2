@@ -4,7 +4,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
     class Program
     {
-        private static int m_TurnNum;
+       private static int m_TurnNum;
 
 
         static void Main(string[] args)
@@ -17,17 +17,26 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             }
         }
 
-        public static int TurnNum {
-            get { 
-                return m_TurnNum; 
-                }
-            set {
+        public static int TurnNum
+        {
+            get
+            {
+                return m_TurnNum;
+            }
+            set
+            {
                 m_TurnNum = value;
-                 }
+            }
+
+
+
+
+
         }
 
 
 
-
+        
     }
 }
+
