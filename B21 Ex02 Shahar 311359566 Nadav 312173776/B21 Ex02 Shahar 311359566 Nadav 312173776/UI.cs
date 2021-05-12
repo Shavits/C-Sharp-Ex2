@@ -48,6 +48,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         public static Move GetPlayerMove()
         {
             Console.WriteLine("Please enter your row number and column number seprated by a space");
+            Console.WriteLine("If you like to Quit enter just Q");
             string moveString = Console.ReadLine();
             string[] inputs = moveString.Split(' ');
             int[] parsedInts = new int[2];
