@@ -1,10 +1,10 @@
 ==========================Exercise Checking Report==========================
-Exercise No...........: 1
+Exercise No...........: 2
 First Student Details.: 311359566 - Shahar Savit
 Second Student Details: 312173776 - Nadav Vilder
 Delivery Date.........: 13 - April - 2021
 Delivered In Delay....: No
 Delay Reason..........: NA
 Visual Studio Version.: 2019
-Comments..............: Fixed part 1 to check for length of binary number and properly calculate average
+Comments..............: NA
 =======================End Exercise Checking Report=========================
