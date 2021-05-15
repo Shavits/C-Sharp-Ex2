@@ -8,7 +8,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
     {
         private int m_Row;
         private int m_Column;
-        private enumXO m_Turn;
+        private eTurn m_Turn;
 
         public Move(int i_row, int i_column)
         {
@@ -17,17 +17,18 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             m_Turn = GetTurn();
         }
 
-        public static enumXO GetTurn()
+        public static eTurn GetTurn()
         {
-            enumXO symbol = enumXO.X;
+            eTurn symbol = eTurn.X;
             if (Program.TurnNum % 2 == 1)
             {
-                symbol = enumXO.O;
+                symbol = eTurn.O;
             }
 
             return symbol;
         }
-        public enum enumXO
+
+        public enum eTurn
         {
             EMPTY,
             X,
@@ -44,7 +45,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             get { return m_Column; }
         }
 
-        public enumXO Turn
+        public eTurn Turn
         {
             get { return m_Turn; }
         }

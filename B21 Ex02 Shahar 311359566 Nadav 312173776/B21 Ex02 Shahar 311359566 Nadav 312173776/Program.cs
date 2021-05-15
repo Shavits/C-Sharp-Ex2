@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
     public class Program
@@ -8,7 +9,6 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         private static Board m_Board;
         private static int m_TurnNum = 0;
         private static bool m_Multiplayer = false;
-
 
         public static void Main(string[] args)
         {
@@ -37,19 +37,9 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
         public static int TurnNum
         {
-            get
-            {
-                return m_TurnNum;
-            }
-            set
-            {
-                m_TurnNum = value;
-            }
-        }
+            get { return m_TurnNum; }
 
-
-
-        
+            set { m_TurnNum = value; }
+        }        
     }
 }
-

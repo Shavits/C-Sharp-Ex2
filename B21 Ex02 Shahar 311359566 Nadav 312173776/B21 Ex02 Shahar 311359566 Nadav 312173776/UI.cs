@@ -2,50 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
     public class UI
     {
-
         public static void BoardPrinter(Board i_Board)
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            StringBuilder row = new StringBuilder();
+            StringBuilder rowBuilder = new StringBuilder();
 
             for (int i = 1; i <= i_Board.BoardSize; i++)
             {
-                row.Append("   " + i);
+                rowBuilder.Append("   " + i);
             }
-            Console.WriteLine(row);
+
+            Console.WriteLine(rowBuilder);
 
             for (int i = 0; i < i_Board.BoardSize; i++)
             {
-                row.Clear();
-                row.Append((i + 1) + "|");
+                rowBuilder.Clear();
+                rowBuilder.Append((i + 1) + "|");
                 for (int j = 0; j < i_Board.BoardSize; j++)
                 {
-                    if (i_Board.BoardMatrix[i, j] == Move.enumXO.EMPTY)
+                    if (i_Board.BoardMatrix[i, j] == Move.eTurn.EMPTY)
                     {
-                        row.Append("   |");
+                        rowBuilder.Append("   |");
                     }
                     else
                     {
-                        row.Append($" {i_Board.BoardMatrix[i, j]} |");
+                        rowBuilder.Append($" {i_Board.BoardMatrix[i, j]} |");
                     }
-
                 }
-                Console.WriteLine(row);
-                row.Clear();
-                row.Append(" =").Append('=', 4 * i_Board.BoardSize);
-                Console.WriteLine(row);
+
+                Console.WriteLine(rowBuilder);
+                rowBuilder.Clear();
+                rowBuilder.Append(" =").Append('=', 4 * i_Board.BoardSize);
+                Console.WriteLine(rowBuilder);
             }
         }
 
-        public static Move GetPlayerMove(out bool gameQuit)
+        public static Move GetPlayerMove(out bool o_gameQuit)
         {
             Move playerMove = null;
-            gameQuit = false;
+            o_gameQuit = false;
             bool checking = true;
             while (checking)
             {
@@ -56,8 +55,8 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 int[] parsedInts = new int[2];
                 if (moveString.Equals("Q"))
                 {
-                    gameQuit = CheckForGameQuit();
-                    if (!gameQuit)
+                    o_gameQuit = CheckForGameQuit();
+                    if (!o_gameQuit)
                     {
                         continue;
                     }
@@ -66,31 +65,37 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                         checking = false;
                     }
                 }
-                if (!gameQuit)
+
+                if (!o_gameQuit)
                 {
                     if(!IsValidInputs(inputs, out parsedInts))
                     {
                         Console.WriteLine("Invalid input.");
                         continue;
                     }
+
                     checking = false;
-                    playerMove = new Move(parsedInts[0]-1, parsedInts[1]-1);
+                    playerMove = new Move(parsedInts[0] - 1, parsedInts[1] - 1);
                 }
             }
+
             return playerMove;
         }
 
         private static bool IsValidInputs(string[] i_Inputs, out int[] o_parsedInts)
         {
             bool valid = true;
+
             if(i_Inputs.Length != 2)
             {
                 valid = false;
             }
+
             int[] parsedInts = new int[2];
+
             if (valid)
             {
-                for(int i =0; i<i_Inputs.Length; i++)
+                for(int i = 0; i < i_Inputs.Length; i++)
                 {
                     if (!int.TryParse(i_Inputs[i].ToString(), out parsedInts[i]))
                     {
@@ -98,42 +103,47 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     }
                 }
             }
+
             o_parsedInts = parsedInts;
+
             return valid;
         }
+
         public static int GetBoardSizeFromPlayer()
         {
             Console.WriteLine("Please enter the size of board (3 to 9)");
             string boardSizeString = Console.ReadLine();
-            int boardSize;
-            bool validInput = int.TryParse(boardSizeString, out boardSize);
+            bool validInput = int.TryParse(boardSizeString, out int boardSize);
+
             while (!validInput || (boardSize < 3 || boardSize > 9))
             {
                 Console.WriteLine("Invalid size, please enter the size of board (3 to 9)");
                 boardSizeString = Console.ReadLine();
                 validInput = int.TryParse(boardSizeString, out boardSize);
             }
+
             return boardSize;
         }
+
         public static bool CheckIfMultiplayer()
         {
             Console.WriteLine("Please choose number of human players (1/2)");
             string numOfPlayersString = Console.ReadLine();
-            int numOfPlayers;
             bool multiplayer = false;
-            bool validInput = int.TryParse(numOfPlayersString, out numOfPlayers);
+            bool validInput = int.TryParse(numOfPlayersString, out int numOfPlayers);
             while (!validInput || (numOfPlayers < 0 || numOfPlayers > 2))
             {
                 Console.WriteLine("Invalid number of players, please choose number of human players (1/2)");
                 numOfPlayersString = Console.ReadLine();
                 validInput = int.TryParse(numOfPlayersString, out numOfPlayers);
             }
+
             if (numOfPlayers == 2)
             {
                 multiplayer = true;
             }
-            return multiplayer;
 
+            return multiplayer;
         }
 
         public static bool PlayMultiplayer(Board io_Board)
@@ -149,19 +159,22 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 {
                     break;
                 }
+
                 while (!io_Board.UpdateBoard(cur_move))
                 {
                     Console.WriteLine("Ilegal Move, please enter a new move");
                     cur_move = GetPlayerMove(out gameQuit);
                 }
+
                 BoardPrinter(io_Board);
                 if (io_Board.CheckLose())
                 {
-                    Move.enumXO winner = Move.enumXO.X;
-                    if (Move.GetTurn() == Move.enumXO.X)
+                    Move.eTurn winner = Move.eTurn.X;
+                    if (Move.GetTurn() == Move.eTurn.X)
                     {
-                        winner = Move.enumXO.O;
+                        winner = Move.eTurn.O;
                     }
+
                     Console.WriteLine($"You lost! {winner} Wins!");
                     break;
                 }
@@ -169,16 +182,20 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 gameTied = io_Board.CheckTie();
                 Program.TurnNum++;
             }
+
             if (gameTied)
             {
                 Console.WriteLine("The game is tied, nobody wins");
             }
+
             if (!gameQuit)
             {
                 gameQuit = !CheckForNewGame();
             }
-            return gameQuit; 
+
+            return !gameQuit; 
         }
+
         public static bool PlayVsMachine(Board io_Board)
         {
             BoardPrinter(io_Board);
@@ -186,7 +203,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             bool gameQuit = false;
             while (!gameTied)
             {
-                if (Move.GetTurn() == Move.enumXO.X)
+                if (Move.GetTurn() == Move.eTurn.X)
                 {
                     Console.WriteLine("It is now your turn");
                     Move cur_move = GetPlayerMove(out gameQuit);
@@ -194,11 +211,13 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     {
                         break;
                     }
+
                     while (!io_Board.UpdateBoard(cur_move))
                     {
                         Console.WriteLine("Ilegal Move, please enter a new move");
                         cur_move = GetPlayerMove(out gameQuit);
                     }
+
                     if (gameQuit)
                     {
                         break;
@@ -208,31 +227,36 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 {
                     io_Board.MakeMachineMove();
                 }
+
                 BoardPrinter(io_Board);
                 if (io_Board.CheckLose())
                 {
-                    if (Move.GetTurn() == Move.enumXO.X)
+                    if (Move.GetTurn() == Move.eTurn.X)
                     {
-                        Console.WriteLine($"You lost! AI Wins!");
+                        Console.WriteLine($"You lost! the Machine Wins!");
                     }
                     else
                     {
                         Console.WriteLine($"You Won!");
                     }
+
                     break;
                 }
 
                 gameTied = io_Board.CheckTie();
                 Program.TurnNum++;
             }
+
             if (gameTied)
             {
                 Console.WriteLine("The game is tied, nobody wins");
             }
+
             if (!gameQuit)
             {
                 gameQuit = !CheckForNewGame();
             }
+
             return !gameQuit;
         }
 
@@ -260,6 +284,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     Console.WriteLine("Invalid Input.");
                 }
             }
+
             return newGame;
         }
 
@@ -286,14 +311,8 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     Console.WriteLine("Invalid Input.");
                 }
             }
+
             return gameQuit;
         }
     }
-
-
-
-
-
-
 }
-
