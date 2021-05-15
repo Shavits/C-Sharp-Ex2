@@ -4,13 +4,12 @@ using System.Text;
 
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
-    class Board
+    class BoardLogic
     {
         private Move.enumXO[,] m_BoardMatrix;
         private int m_BoardSize;
 
-        //REMOVE - Assumes size was checked before creation
-        public Board(int i_BoardSize)
+        public BoardLogic(int i_BoardSize)
         {
             m_BoardSize = i_BoardSize;
             m_BoardMatrix = new Move.enumXO[i_BoardSize, i_BoardSize];
