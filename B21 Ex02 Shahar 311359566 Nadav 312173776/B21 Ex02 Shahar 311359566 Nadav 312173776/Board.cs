@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
-    class BoardLogic
+    public class Board
     {
         private Move.enumXO[,] m_BoardMatrix;
         private int m_BoardSize;
+        private Random rand;
 
-        public BoardLogic(int i_BoardSize)
+        public Board(int i_BoardSize)
         {
             m_BoardSize = i_BoardSize;
             m_BoardMatrix = new Move.enumXO[i_BoardSize, i_BoardSize];
+            rand = new Random();
 
 
         }
@@ -122,7 +125,30 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             return Program.TurnNum == Math.Pow(m_BoardSize, 2)-1;
         }
 
+        public void MakeMachineMove()
+        {
+            Thread.Sleep(1000);
+            List<Move> availableMoves = GetAvailableMoves();
+            Move chosenMove = availableMoves[rand.Next(availableMoves.Count)];
+            this.UpdateBoard(chosenMove);
+        }
 
+        private List<Move> GetAvailableMoves()
+        {
+            List<Move> availableMoves = new List<Move>();
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    if (m_BoardMatrix[i, j] == Move.enumXO.EMPTY)
+                    {
+                        Move possibleMove = new Move(i, j);
+                        availableMoves.Add(possibleMove);
+                    }
+                }
+            }
+            return availableMoves;
+        }
 
         //Properties
         public Move.enumXO[,] BoardMatrix

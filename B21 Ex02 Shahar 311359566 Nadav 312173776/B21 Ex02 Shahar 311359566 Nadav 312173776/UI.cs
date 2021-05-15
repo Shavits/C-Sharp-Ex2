@@ -5,10 +5,10 @@ using System.Text;
 
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
-    class UI
+    public class UI
     {
 
-        public static void BoardPrinter(BoardLogic i_Board)
+        public static void BoardPrinter(Board i_Board)
         {
             Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder row = new StringBuilder();
@@ -41,9 +41,6 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 Console.WriteLine(row);
             }
         }
-
-
-
 
         public static Move GetPlayerMove(out bool gameQuit)
         {
@@ -118,7 +115,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             }
             return boardSize;
         }
-        public static bool CheckIfMultuplayer()
+        public static bool CheckIfMultiplayer()
         {
             Console.WriteLine("Please choose number of human players (1/2)");
             string numOfPlayersString = Console.ReadLine();
@@ -139,8 +136,9 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 
         }
 
-        public static bool PlayMultiplayer(BoardLogic io_Board)
+        public static bool PlayMultiplayer(Board io_Board)
         {
+            BoardPrinter(io_Board);
             bool gameTied = false;
             bool gameQuit = false;
             while (!gameTied)
@@ -177,12 +175,13 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             }
             if (!gameQuit)
             {
-                gameQuit = CheckForNewGame();
+                gameQuit = !CheckForNewGame();
             }
             return gameQuit; 
         }
-        public static bool PlayVsMachine(BoardLogic io_Board)
+        public static bool PlayVsMachine(Board io_Board)
         {
+            BoardPrinter(io_Board);
             bool gameTied = false;
             bool gameQuit = false;
             while (!gameTied)
@@ -207,7 +206,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 }
                 else
                 {
-                    AI.MakeAIMove(io_Board);
+                    io_Board.MakeMachineMove();
                 }
                 BoardPrinter(io_Board);
                 if (io_Board.CheckLose())
@@ -249,6 +248,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 {
                     newGame = true;
                     checking = false;
+                    Ex02.ConsoleUtils.Screen.Clear();
                 }
                 else if (answer == "N")
                 {

@@ -4,13 +4,11 @@ using System.Text;
 
 namespace B21_Ex02_Shahar_311359566_Nadav_312173776
 {
-    class Move
+    public class Move
     {
         private int m_Row;
         private int m_Column;
         private enumXO m_Turn;
-
-
 
         public Move(int i_row, int i_column)
         {
@@ -27,7 +25,6 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 symbol = enumXO.O;
             }
 
-          // Program.TurnNum++;
             return symbol;
         }
         public enum enumXO
