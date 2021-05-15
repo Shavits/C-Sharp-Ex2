@@ -41,10 +41,10 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
             }
         }
 
-        public static Move GetPlayerMove(out bool o_gameQuit)
+        public static Move GetPlayerMove(out bool o_ContinueGame)
         {
             Move playerMove = null;
-            o_gameQuit = false;
+            o_ContinueGame = true;
             bool checking = true;
             while (checking)
             {
@@ -55,8 +55,8 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 int[] parsedInts = new int[2];
                 if (moveString.Equals("Q"))
                 {
-                    o_gameQuit = CheckForGameQuit();
-                    if (!o_gameQuit)
+                    o_ContinueGame = !CheckForGameQuit();
+                    if (o_ContinueGame)
                     {
                         continue;
                     }
@@ -66,7 +66,7 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     }
                 }
 
-                if (!o_gameQuit)
+                if (o_ContinueGame)
                 {
                     if(!IsValidInputs(inputs, out parsedInts))
                     {
@@ -150,12 +150,12 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
         {
             BoardPrinter(io_Board);
             bool gameTied = false;
-            bool gameQuit = false;
+            bool continueGame = true;
             while (!gameTied)
             {
                 Console.WriteLine($"It is now {Move.GetTurn()} turn");
-                Move cur_move = GetPlayerMove(out gameQuit);
-                if (gameQuit)
+                Move cur_move = GetPlayerMove(out continueGame);
+                if (!continueGame)
                 {
                     break;
                 }
@@ -163,7 +163,11 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 while (!io_Board.UpdateBoard(cur_move))
                 {
                     Console.WriteLine("Ilegal Move, please enter a new move");
-                    cur_move = GetPlayerMove(out gameQuit);
+                    cur_move = GetPlayerMove(out continueGame);
+                    if (!continueGame)
+                    {
+                        break;
+                    }
                 }
 
                 BoardPrinter(io_Board);
@@ -188,26 +192,26 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 Console.WriteLine("The game is tied, nobody wins");
             }
 
-            if (!gameQuit)
+            if (continueGame)
             {
-                gameQuit = !CheckForNewGame();
+                continueGame = CheckForNewGame();
             }
 
-            return !gameQuit; 
+            return continueGame; 
         }
 
         public static bool PlayVsMachine(Board io_Board)
         {
             BoardPrinter(io_Board);
             bool gameTied = false;
-            bool gameQuit = false;
+            bool continueGame = true;
             while (!gameTied)
             {
                 if (Move.GetTurn() == Move.eTurn.X)
                 {
                     Console.WriteLine("It is now your turn");
-                    Move cur_move = GetPlayerMove(out gameQuit);
-                    if (gameQuit)
+                    Move cur_move = GetPlayerMove(out continueGame);
+                    if (!continueGame)
                     {
                         break;
                     }
@@ -215,12 +219,11 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                     while (!io_Board.UpdateBoard(cur_move))
                     {
                         Console.WriteLine("Ilegal Move, please enter a new move");
-                        cur_move = GetPlayerMove(out gameQuit);
-                    }
-
-                    if (gameQuit)
-                    {
-                        break;
+                        cur_move = GetPlayerMove(out continueGame);
+                        if (!continueGame)
+                        {
+                            break;
+                        }
                     }
                 }
                 else
@@ -252,12 +255,12 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 Console.WriteLine("The game is tied, nobody wins");
             }
 
-            if (!gameQuit)
+            if (continueGame)
             {
-                gameQuit = !CheckForNewGame();
+                continueGame = CheckForNewGame();
             }
 
-            return !gameQuit;
+            return continueGame;
         }
 
         private static bool CheckForNewGame()
