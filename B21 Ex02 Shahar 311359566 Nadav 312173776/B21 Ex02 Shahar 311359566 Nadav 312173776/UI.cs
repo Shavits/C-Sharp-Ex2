@@ -91,11 +91,14 @@ namespace B21_Ex02_Shahar_311359566_Nadav_312173776
                 valid = false;
             }
             int[] parsedInts = new int[2];
-            for(int i =0; i<i_Inputs.Length; i++)
+            if (valid)
             {
-                if (!int.TryParse(i_Inputs[i].ToString(), out parsedInts[i]))
+                for(int i =0; i<i_Inputs.Length; i++)
                 {
-                    valid = false;
+                    if (!int.TryParse(i_Inputs[i].ToString(), out parsedInts[i]))
+                    {
+                        valid = false;
+                    }
                 }
             }
             o_parsedInts = parsedInts;
